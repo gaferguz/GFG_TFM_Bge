@@ -9,10 +9,7 @@ library(btools)
 
 ###############
 
-# Parte copiada del TFM de Nuria Andres / bioconductor vignetes:
-# https://bioconductor.org/packages/devel/bioc/vignettes/tximport/inst/doc/tximport.html#kallisto
-
-# Listamos los archivos y generamos el path, en este caso la tabla se ha hecho en excel
+# Listamos los archivos y generamos la ruta
 path <- "./Kallisto_Enriched/"
 x <- list.files(path)
 x <- x[grepl("output", x)]
