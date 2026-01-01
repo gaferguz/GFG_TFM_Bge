@@ -1,0 +1,14 @@
+{
+	"n_targets": 61092,
+	"n_bootstraps": 0,
+	"n_processed": 9248430,
+	"n_pseudoaligned": 7195538,
+	"n_unique": 2749351,
+	"p_pseudoaligned": 77.8,
+	"p_unique": 29.7,
+	"kallisto_version": "0.51.1",
+	"index_version": 13,
+	"k-mer length": 31,
+	"start_time": "Tue Nov 18 23:50:02 2025",
+	"call": "kallisto quant -i /home/gaferguz/Blatella/Fused_9.11.2025/Enriched -o /home/gaferguz/Blatella/Fused_9.11.2025/output_Control-FG-3_S35_ --rf-stranded -t 12 Control-FG-3_S35_.R1_trD_1.cor.fq Control-FG-3_S35_.R2_trD_2.cor.fq"
+}

@@ -1,0 +1,14 @@
+{
+	"n_targets": 61092,
+	"n_bootstraps": 0,
+	"n_processed": 4720030,
+	"n_pseudoaligned": 4110727,
+	"n_unique": 891970,
+	"p_pseudoaligned": 87.1,
+	"p_unique": 18.9,
+	"kallisto_version": "0.51.1",
+	"index_version": 13,
+	"k-mer length": 31,
+	"start_time": "Tue Nov 18 23:47:51 2025",
+	"call": "kallisto quant -i /home/gaferguz/Blatella/Fused_9.11.2025/Enriched -o /home/gaferguz/Blatella/Fused_9.11.2025/output_control-CG-pool-3_S27_ --rf-stranded -t 12 control-CG-pool-3_S27_.R1_trD_1.cor.fq control-CG-pool-3_S27_.R2_trD_2.cor.fq"
+}
