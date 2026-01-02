@@ -2,8 +2,11 @@
 # FUNCTIONAL ENRICHMENT #
 #########################
 
-## Enriquecimiento funcional usando eggnog
-
+## Cargamos las librerias necesarias (algunas requieren instalacion especifica con devtools)
+library(devtools)
+library(tidyverse)
+library(clusterProfiler)
+library(ontologyIndex)
 install.packages(c("BiocManager", "devtools"))
 library("devtools")
 library("BiocManager")
@@ -11,13 +14,11 @@ BiocManager::install("tidyverse")
 devtools::install_github("GuangchuangYu/GOSemSim")
 devtools::install_github("GuangchuangYu/clusterProfiler")
 
-library(devtools)
-library(tidyverse)
-library(clusterProfiler)
-library(ontologyIndex)
+## Creamos los archivos para el enriquecimiento funcional de las anotaciones con Eggnog
 
-# prepare the term to gene table
-eggNOG <- read_tsv("/media/gfg017/SEAGATE_GFG/9-TFM-2026/7.EggNOG/Bge_Annotations.tsv") %>%
+
+# Leemos la tabla y la parseamos separando en entradas cada GO asignado a un transcrito
+eggNOG <- read_tsv("./EggNOG/Bge_Annotations.tsv") %>%
   dplyr::select(GOs, query) %>%
   dplyr::filter(GOs != "-") %>%
   separate_rows(GOs, sep = ",") %>%
@@ -28,9 +29,9 @@ eggNOG <- read_tsv("/media/gfg017/SEAGATE_GFG/9-TFM-2026/7.EggNOG/Bge_Annotation
 colnames(eggNOG) <- c("term", "gene")
 
 # prepare the term to name table
-# Tengo que descargarme de manera manual la DB de go.obo
-# https://geneontology.org/docs/download-ontology/
-ontology <- get_ontology(file = "/media/gfg017/SEAGATE_GFG/9-TFM-2026/7.EggNOG/go.obo",
+# Se descarga de manera manual la DB de go.obo: https://geneontology.org/docs/download-ontology/
+
+ontology <- get_ontology(file = "./EggNOG/go.obo",
                          propagate_relationships = "is_a",
                          extract_tags = "everything",
                          merge_equivalent_terms = TRUE)
