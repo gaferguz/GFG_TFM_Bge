@@ -1,5 +1,5 @@
 # GFG_TFM_Bge
-This repository is meant to store all the scripts used for De novo transcriptome assembly, Diffential Expression Analysis, Weigthed Gene Correlation Network Analysis (WGCNA) and Gene Set Enrichment Analysis (GSEA) in **Blatella germanica** as part of the final project of a masters degree Final Project. All code is based on bash and R.
+This repository is meant to store all the scripts used for **De novo transcriptome assembly**, Diffential Expression Analysis (**DET**), Weigthed Gene Correlation Network Analysis (**WGCNA**) and Gene Set Enrichment Analysis (**GSEA**) in *Blatella germanica* as part of the final project of a masters degree Final Project. All code is based on bash and R.
 
 # Pipeline:
 - Trimming and sanitizing raw fastq (Trimmomatic + Rcorrector)
