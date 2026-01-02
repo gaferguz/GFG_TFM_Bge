@@ -212,8 +212,8 @@ DifExp_pairwise <- function(mifactor, muestras, objeto_dds){
 ##################################
 
 # Cargamos los archivos de anotacion funcional
-term2gene <- read_tsv("/media/gfg017/SEAGATE_GFG/9-TFM-2026/7.EggNOG/term2gene_GO.tsv")
-term2name <- read_tsv("/media/gfg017/SEAGATE_GFG/9-TFM-2026/7.EggNOG/term2name_GO.tsv")
+term2gene <- read_tsv("./EggNOG/term2gene_GO.tsv")
+term2name <- read_tsv("./EggNOG/term2name_GO.tsv")
 
 
 # Listamos los archivos y generamos la ruta usando el patron output
