@@ -7,17 +7,15 @@
 #SBATCH --time=4-00:00:00
 #SBATCH --output=Bge_Kallisto_Enriched_18.11.log
 
-mkdir Kallisto_Merged # Creamos carpeta
+mkdir Kallisto # Creamos carpeta donde volcar todos los datos
 
-#read -p "Path completo de las reads: " reads # Asumimos Pair_end acabados en R1/R2.${format}
-#read -p "Formato de las reads (fastq fastq.gz): " format
-#read -p "Path completo de los index del transcriptoma (inlcuyendo prefijo): " index
-
-format='cor.fq'
+# Definimos las variables principales
 #index='/home/gaferguz/Blatella/Fused_9.11.2025/Trinity_idx'
 #index='/home/gaferguz/Blatella/Fused_9.11.2025/SPADES_idx'
 #index='/home/gaferguz/Blatella/Fused_9.11.2025/okaycull_idx'
 index='/home/gaferguz/Blatella/Fused_9.11.2025/Enriched'
+# Asumimos Pair_end acabados en R1/R2.${format}
+format='cor.fq'
 
 loc=$(pwd)
 
