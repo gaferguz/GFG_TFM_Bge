@@ -22,7 +22,7 @@ library(clusterProfiler)
 
 
 ##################################
-#           FUNCTIONS            #
+#           FUNCIONES            #
 ##################################
 
 
