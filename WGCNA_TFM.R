@@ -1,6 +1,4 @@
-# script to perform WGCNA
-# setwd("~/Desktop/demo/WGCNA")
-
+# Cargamos las librerias necesarias
 library(WGCNA)
 library(DESeq2)
 library(GEOquery)
@@ -155,16 +153,8 @@ CorLevelPlot(heatmap.data.tg,
 
 
 
-
-
 # ANALISIS INTRAMODULO
-
-
 # Calculamos MM (membresia al modulo) y p-valor asociado de cada transcrito al modulo
-
-# The module membership/intramodular connectivity is calculated as the correlation of the eigengene and the gene expression profile. 
-# This quantifies the similarity of all genes on the array to every module.
-
 module.membership.measure <- cor(module_eigengenes, norm.counts, use = 'p')
 module.membership.measure.pvals <- corPvalueStudent(module.membership.measure, nSamples)
 MMcors <- as.data.frame(module.membership.measure)
@@ -172,34 +162,10 @@ MMcors <- as.data.frame(module.membership.measure)
 # Calculamos la significancia de cada transcrito en cada modulo y filtramos por significancia > 0.6
 gene.signf.corr <- cor(norm.counts, traits$data.MT.vs.all, use = 'p')
 gene.signf.corr.pvals <- corPvalueStudent(gene.signf.corr, nSamples)
-
 gene.signf.corr_filt <- as.data.frame(gene.signf.corr)
 gene.signf.corr_filt <-  as.character(rownames(gene.signf.corr_filt %>% dplyr::filter(.[[1]] > 0.6)))
 
-# MODIFICACION DEL 21.12.2025
-modNames = substring(names(bwnet$MEs), 3) #extract module names
-
-# Calculate the module membership and the associated p-values
-geneModuleMembership = as.data.frame(cor(norm.counts, bwnet$MEs, use = "p"))
-MMPvalue = as.data.frame(corPvalueStudent(as.matrix(geneModuleMembership), nrow(norm.counts)))
-names(geneModuleMembership) = paste("MM", modNames, sep="")
-names(MMPvalue) = paste("p.MM", modNames, sep="")
-
-#Calculate the gene significance and associated p-values
-geneTraitSignificance = as.data.frame(cor(norm.counts, traits$FB_state_bin, use = "p"))
-GSPvalue = as.data.frame(corPvalueStudent(as.matrix(geneTraitSignificance), nrow(norm.counts)))
-names(geneTraitSignificance) = paste("GS.", names(weight), sep="")
-names(GSPvalue) = paste("p.GS.", names(weight), sep="")
-head(GSPvalue)
-
-
-gene.signf.corr.pvals %>% 
-  as.data.frame() %>% 
-  arrange(V1) %>% 
-  head(100)
-
-# Choose Top Hub in each module function
-
+# Elegir el transcrito con mayor conectividad de un modulo (Hub)
 colores <- bwnet$colors
 Hubs <- chooseTopHubInEachModule(
   norm.counts, 
@@ -208,58 +174,8 @@ Hubs <- chooseTopHubInEachModule(
   power = 9,
   type = "signed")
 
-TopH <- topHubs(norm.counts, colorh = colores, power = 9, omitColors = NA)
-
-gene.signf.corr_filt <- as.data.frame(gene.signf.corr)
-gene.signf.corr_filt <-  as.character(rownames(gene.signf.corr_filt %>% dplyr::filter(.[[1]] > 0.6)))
-
-# RASTREO A NIVEL DE TEJIDOS (21.12.2025)
-# Ejemplo, se evita porque se pierda absolutamente todo
-MM_MEred_SG <- MMcors[grepl("^MEred$", rownames(MMcors)),]
-MM_MEred_SG <- as.data.frame(t(MM_MEred_SG))
-MM_MEred_SG <- MM_MEred_SG %>% dplyr::filter(MEred > 0.83)
-MM_MEred_SG <- as.character(rownames(MM_MEred_SG))
-MM_MEred_SG <- MM_MEred_SG[MM_MEred_SG %in% gene.signf.corr_filt]
-
-Hubs_MEred <- TopH[grepl("^red$", TopH$module),]
-Hubs_MEred <- Hubs_MEred[order(Hubs_MEred$connectivity_rowSums_adj, decreasing = TRUE),]
-
-paste(Hubs_MEred$gene[1:150], collapse = "|")
-
-# Este modulo es enorme pero no muestra nada relacionado exclusivamente con respuesta inmune
-Hubs_MEbrown_MTpos <- TopH[grepl("^brown$", TopH$module),]
-Hubs_MEbrown_MTpos <- Hubs_MEbrown_MTpos[order(Hubs_MEbrown_MTpos$connectivity_rowSums_adj, decreasing = TRUE),]
-
-paste(Hubs_MEbrown_MTpos$gene, collapse = "|")
-paste(Hubs_MEbrown_MTpos$gene[1:150], collapse = "|")
-
-# Vamos al otro que no tiene defensinas en el pero tiene una Tollo y es pequeño
-Hubs_MEs3_MTpos <- TopH[grepl("^skyblue3$", TopH$module),]
-Hubs_MEs3_MTpos <- Hubs_MEs3_MTpos[order(Hubs_MEs3_MTpos$connectivity_rowSums_adj, decreasing = TRUE),]
-
-paste(Hubs_MEs3_MTpos$gene, collapse = "|")
-
-
-# RASTREO A NIVEL DE GRUPOS 
-
-# De esta que es la mas grande no ha salido nada
-Hubs_MEma_FBGF_pos <- TopH[grepl("^magenta$", TopH$module),]
-Hubs_MEma_FBGF_pos <- Hubs_MEma_FBGF_pos[order(Hubs_MEma_FBGF_pos$connectivity_rowSums_adj, decreasing = TRUE),]
-
-paste(Hubs_MEma_FBGF_pos$gene, collapse = "|")
-
-Hubs_MEmb_HGFeces_pos <- TopH[grepl("^midnightblue$", TopH$module),]
-Hubs_MEmb_HGFeces_pos <- Hubs_MEmb_HGFeces_pos[order(Hubs_MEmb_HGFeces_pos$connectivity_rowSums_adj, decreasing = TRUE),]
-
-paste(Hubs_MEmb_HGFeces_pos$gene, collapse = "|")
-
-
-
-# Using the gene significance you can identify genes that have a high significance for trait of interest 
-# Using the module membership measures you can identify genes with high module membership in interesting modules.
-
-
-# the grey module is omitted
+# Declaramos una funcion propuesta en biostars para ordenar los transcritos segun su conectividad a un modulo
+# Se trata usar "chooseTopHubInEachModule" de forma iterativo y sumando la los valores de la matriz de adyacencia
 topHubs <- function (datExpr, colorh, omitColors = "grey", power = 2, type = "signed", 
                      ...) 
 {
@@ -288,8 +204,6 @@ topHubs <- function (datExpr, colorh, omitColors = "grey", power = 2, type = "si
       tibble::rownames_to_column() %>% setNames(c('gene', 'connectivity_rowSums_adj')) %>% mutate(module = m)
     connectivity_table <- connectivity_table %>% rbind(sorted_genes)
     
-    
-    
   }
   if (isIndex) {
     hubs = as.numeric(hubs)
@@ -297,6 +211,8 @@ topHubs <- function (datExpr, colorh, omitColors = "grey", power = 2, type = "si
   }
   return(connectivity_table %>% na.omit)
 }
+
+TopH <- topHubs(norm.counts, colorh = colores, power = 9, omitColors = NA)
 
 
 
