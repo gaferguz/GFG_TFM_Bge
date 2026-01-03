@@ -8,6 +8,7 @@ library(CorLevelPlot)
 library(gridExtra)
 library(tximport)
 
+# CODIGO ADAPTADO DE WORKSHOP ONLINE: https://github.com/kpatel427/YouTubeTutorials/blob/main/WGCNA.R
 
 # Listamos los archivos y generamos el path (igual que en el analisis DET + GSEA)
 x <- list.files("./Kallisto/")
