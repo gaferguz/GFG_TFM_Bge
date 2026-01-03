@@ -3,6 +3,8 @@ This repository is meant to store all the scripts used for **De novo transcripto
 
 Este repositorio reúne todos los scripts generados en el ensamblaje de un transcriptoma de novo, el análisis de expresión diferencial, análisis de redes y análisis de enriquecimiento funcional en *Blatella germanica* como parte del trabajo de fin de master.
 
+** **
+
 # Pipeline:
 ```
 Trimming and sanitizing raw fastq (Trimmomatic + Rcorrector)
