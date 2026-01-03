@@ -53,7 +53,7 @@ factor <- c("condition")
 
 # 1 : Primeros ensamblajes filtrados (para Trinity y Spades)
 
-# 2 : Filtrado de los transcritos de EvidenGene tr2aacds (okay + cull)
+# 2 : Filtrado de los transcritos de EvidentialGene tr2aacds.pl (okay + cull)
 
 # Ejemplo
 
