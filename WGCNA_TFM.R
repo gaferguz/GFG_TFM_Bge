@@ -11,10 +11,10 @@ library(tximport)
 # CODIGO ADAPTADO DE WORKSHOP ONLINE: https://github.com/kpatel427/YouTubeTutorials/blob/main/WGCNA.R
 
 # Listamos los archivos y generamos el path (igual que en el analisis DET + GSEA)
-x <- list.files("./Kallisto/")
-files <- file.path("./Kallisto/", x, "abundance.h5")
+x <- list.files("../Kallisto/")
+files <- file.path("../Kallisto/", x, "abundance.h5")
 files <- files[grepl("output_", files)]
-samples <- read.table(file.path("./samples.txt"), header=TRUE)
+samples <- read.table(file.path("../samples.txt"), header=TRUE)
 rownames(samples) <- samples$sample
 
 # Creando clase usando counts de kallisto
