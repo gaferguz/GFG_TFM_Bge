@@ -16,5 +16,4 @@ Trimming and sanitizing raw fastq (Trimmomatic + Rcorrector)
 - DEG analysis on trasncripts using DESeq2
 - Gene enrichment analysis on transcripts using gProfiler
 - Weighted gene correlation network analysis
-
 ```
