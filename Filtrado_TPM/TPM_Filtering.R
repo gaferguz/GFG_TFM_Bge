@@ -45,7 +45,7 @@ TPM_filtering <- function(filtroTPM, datos, factor, TPMs){
 #         MAIN         #
 ########################
 
-datos <- read.csv2("../5.DEG/samples.txt", sep = "\t")
+datos <- read.csv2("../samples.txt", sep = "\t")
 
 factor <- c("condition")
 
@@ -57,7 +57,7 @@ factor <- c("condition")
 
 # Ejemplo
 
-TPMs <- read.csv2("../5.DEG/Kallisto_Enriched/Kallisto_Merged/Abundance.tsv", sep = " ")
+TPMs <- read.csv2("../Kallisto/Kallisto_Results/Kallisto_Merged/Abundance.tsv", sep = " ")
 # modificacion de las columnas para que sean iguales a los nombres de las muestras en los metadatos
 colnames(TPMs) <- gsub("\\.","-",
                        gsub("tpm_","", 
