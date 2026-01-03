@@ -7,26 +7,27 @@ Este repositorio reúne todos los scripts generados en el ensamblaje de un trans
 
 
 # Pipeline:
-```
-- Quality control of fastq (Trimming/fasQC.sh)
 
-- Assembly Trinity + RNASpades (Trimming/Sanear_[X]_TFM.sh)
+1 - Control de calidad de los .fastq (Trimming/fasQC.sh)
 
-- Pseudo-alignment using Kallisto (Alinear_kallisto.sh)
+2 - Ensamblaje Trinity + RNASpades (Trimming/Sanear_[X]_TFM.sh)
 
-- TPM >= 1 filtering (Filtrado_TPM/TPM_Filtering.R)
+3 - Pseudo-alineamiento usando Kallisto (Alinear_kallisto.sh)
 
-- Creating a consensus (EvidentialGene/Generar_Consenso.sh)
+4 - Filtro por TPM >= 1 (Filtrado_TPM/TPM_Filtering.R)
 
-- Merge okay and cull set (Filtrado_TPM/Seleccion_transcritos_okaycull.R)
+5 - Creando un consenso (EvidentialGene/Generar_Consenso.sh)
 
-- Pseudo-aligment using Kallisto (Alinear_kallisto.sh)
+6 - Fusion de transcritos "okay" y "cull" (Filtrado_TPM/Seleccion_transcritos_okaycull.R)
 
-- Filtering based on TPM >=1 (Filtrado_TPM/TPM_Filtering.R)
+7 - Pseudo-alineamiento usando Kallisto (Alinear_kallisto.sh)
 
-- Final round of Kallisto on final transcriptome (Alinear_kallisto.sh)
+8 - Filtro por TPM >= 1 (Filtrado_TPM/TPM_Filtering.R)
 
-- DEG analysis using DESeq2 + GSEA using clusterProfiler and Eggnog (Analisis_DET_GSEA.R)
+9 - Ronda final de Kallisto en el transcriptoma definitivo (Alinear_kallisto.sh)
 
-- Weighted gene correlation network analysis (WGCNA/WGCNA_TFM.R)
-```
+10 - Analysis de expresion diferencial con DESeq2 + GSEA con clusterProfiler y Eggnog (Analisis_DET_GSEA.R)
+
+11 - Weighted gene correlation network analysis (WGCNA/WGCNA_TFM.R)
+
+* El scripts para procesar las anotaciones del transcriptoma están en la carpeta /EggNog
