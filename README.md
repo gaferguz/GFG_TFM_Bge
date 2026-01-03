@@ -30,4 +30,4 @@ Este repositorio reúne todos los scripts generados en el ensamblaje de un trans
 
 11 - Weighted gene correlation network analysis (WGCNA/WGCNA_TFM.R)
 
-* El scripts para procesar las anotaciones del transcriptoma están en la carpeta /EggNog
+El script para procesar las anotaciones del transcriptoma están en la carpeta /EggNog
