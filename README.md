@@ -17,6 +17,4 @@ Trimming and sanitizing raw fastq (Trimmomatic + Rcorrector)
 - Gene enrichment analysis on transcripts using gProfiler
 - Weighted gene correlation network analysis
 
-
-
 ```
