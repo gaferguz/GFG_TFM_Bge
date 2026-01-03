@@ -9,14 +9,16 @@
 
 mkdir Kallisto # Creamos carpeta donde volcar todos los datos
 
+# Indexamos el archivo final del transcriptoma con anotaciones Toll/IMD + AMPs (CDS)
+kallisto index -i Enriched AMPs_Enriched_Final_TPM1_okaycull.mrna 
+
 # Definimos las variables principales
 #index='/home/gaferguz/Blatella/Fused_9.11.2025/Trinity_idx'
 #index='/home/gaferguz/Blatella/Fused_9.11.2025/SPADES_idx'
 #index='/home/gaferguz/Blatella/Fused_9.11.2025/okaycull_idx'
 index='/home/gaferguz/Blatella/Fused_9.11.2025/Enriched'
-# Asumimos Pair_end acabados en R1/R2.${format}
-format='cor.fq'
 
+format='cor.fq' # Formato en el que acaban las reads filtradas con Rcorrector
 loc=$(pwd)
 
 for i in $(ls *${format} | grep "R1" | sed "s/R1.*//g")
